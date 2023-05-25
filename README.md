@@ -1,15 +1,14 @@
-# beanbot
+# Beanbot
 
-To install dependencies:
+# Installation
+You can install the beanbot via the bun commandline utilities.
+To run the bot use the following steps:
 
-```bash
-bun install
-```
+>Install bun: <br>
+>`curl -fsSL https://bun.sh/install | bash`
 
-To run:
+Now you can install the project via git clone.
+After that you should be able to run bun from your shell.
+The following commands will install the bot and run it.
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v0.5.3. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+- `bun test`
