@@ -8,7 +8,3 @@ test("Bot can use network", () => {
       .then(json => expect(json).toBe({}))
 })
 
-test("Bot can authorize to discord", () => {
-
-})
-
