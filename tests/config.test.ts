@@ -11,6 +11,7 @@ test("Bot can read env", () => {
 })
 
 test("Bot can use config", () => {
-    const publicKey = getConfig().publicKey
+    const path = ".env.example"
+    const publicKey = getConfig(path).publicKey
     expect(publicKey).toBe("420")
 })
