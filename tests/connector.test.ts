@@ -1,6 +1,7 @@
 import {describe, expect, test} from "bun:test";
 import getConfig from "../src/config.ts";
 import send from "../src/connector.ts";
+import {spawn} from "bun";
 
 const TEST_API = 'https://jsonplaceholder.typicode.com/todos/420'
 
@@ -38,5 +39,15 @@ describe("Bot can use discord messages", () => {
 
         expect(call.status).toBe(200)
     })
+})
 
+describe("Bot can use inspirobot api",  () => {
+    test("Bot can recieve inspirobot link",   async () => {
+        const link = "https://inspirobot.me/api?generate=true"
+        const call = Bun.spawnSync(["curl", link])
+        const response = call.stdout.toString()
+
+        const isInspirobotLinkRegex = /https:\/\/generated.inspirobot.me\/a\/.*\.jpg/
+        expect(response).toMatch(isInspirobotLinkRegex)
+    })
 })
