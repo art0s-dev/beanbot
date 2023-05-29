@@ -1,19 +1,20 @@
 import {expect, test, describe} from "bun:test";
 import * as dotenv from "dotenv";
 import getConfig from "../src/config";
+import Config from "../src/config";
 
-describe("Bot can use config", () => {
+describe("Config", () => {
     test("Bot can read env", () => {
         const config = { path: ".env.example" }
         const publicKey = dotenv.config(config)
-            .parsed?.PUBLIC_KEY
+            .parsed?.BOT_TOKEN
 
-        expect(publicKey).toBe("420")
+        expect(publicKey).toBe("007")
     })
 
     test("Bot can use config functionality", () => {
-        const path = ".env.example"
-        const publicKey = getConfig(path).publicKey
-        expect(publicKey).toBe("420")
+        const config = new Config(".env.example")
+        const publicKey = config.botToken
+        expect(publicKey).toBe("007")
     })
 })
