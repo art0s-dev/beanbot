@@ -1,16 +1,13 @@
 import {describe, expect, test} from "bun:test";
-import getConfig from "../src/config.ts";
-import send from "../src/connector.ts";
-import {spawn} from "bun";
 import DiscordBot from "../src/DiscordBot.ts";
-import Config from "../src/config.ts";
+import loadConfig from "../src/config.ts";
 
 describe("Discord", async () => {
     test("Bot can write hello world into a channel", async () => {
         const discordApiBaseUrl = "https://discord.com/api/v10";
         const channelId = "1111629582379004005"; //This is the test channel
         const url = `${discordApiBaseUrl}/channels/${channelId}/messages`;
-        const config = new Config();
+        const config = loadConfig()
 
         const call = await Promise.resolve(fetch(url, {
             method: "POST",
@@ -27,8 +24,7 @@ describe("Discord", async () => {
     })
 
     test("Bot can use connection function", async () => {
-        const config = new Config();
-        const bot = new DiscordBot(config)
+        const bot = new DiscordBot(loadConfig())
         const call = await Promise.resolve( bot.send(
             "1111629582379004005",
             "hello there12"
@@ -48,3 +44,4 @@ describe("Inspirobot",  () => {
         expect(response).toMatch(isInspirobotLink)
     })
 })
+
