@@ -19,3 +19,10 @@ The following commands will install the bot and run it.
 ## Development
 Every time a new env var is added, please consider adding
 it to the config interface, too.
+
+## Deployment
+First build an executable with bun:
+> bun build ./main.ts --compile --outfile beanbot
+
+Then you can run the executable with the following command:
+> ./beanbot
