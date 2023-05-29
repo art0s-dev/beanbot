@@ -38,10 +38,31 @@ describe("Inspirobot",  () => {
     test("Bot can recieve inspirobot link",   async () => {
         const link = "https://inspirobot.me/api?generate=true"
         const call = Bun.spawnSync(["curl", link])
-        const response = call.stdout.toString()
+        const linkToImage = call.stdout.toString()
 
         const isInspirobotLink = /https:\/\/generated.inspirobot.me\/a\/.*\.jpg/
-        expect(response).toMatch(isInspirobotLink)
+        expect(linkToImage).toMatch(isInspirobotLink)
+    })
+
+    test("Bot can use inspirobot link to post image", async () => {
+        const link = "https://inspirobot.me/api?generate=true"
+        const curl = Bun.spawnSync(["curl", link])
+        const linkToImage = curl.stdout.toString()
+
+        const bot = new DiscordBot(loadConfig())
+        const call = await Promise.resolve( bot.send(
+            "1111629582379004005",
+            linkToImage
+        ))
+
+        expect(call.status).toBe(200)
+    })
+
+    test("Bot can use send image method", async () => {
+        const bot = new DiscordBot(loadConfig())
+        const call = await Promise.resolve( bot.sendImage() )
+
+        expect(call.status).toBe(200)
     })
 })
 

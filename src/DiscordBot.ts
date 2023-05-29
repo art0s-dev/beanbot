@@ -19,6 +19,13 @@ export default class DiscordBot {
             }
         })
     }
+
+    async sendImage() {
+        const config = this.config
+        const curl = Bun.spawnSync(["curl", config.inspirobotUrl ])
+        const linkToImage = curl.stdout.toString()
+        return this.send(config.channelId, linkToImage)
+    }
 }
 
 
